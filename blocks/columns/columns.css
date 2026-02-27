@@ -1,10 +1,13 @@
+/* Columns block - TCS style */
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .columns img {
   width: 100%;
+  display: block;
 }
 
 .columns > div > div {
@@ -17,17 +20,151 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  border-radius: 8px;
+}
+
+/* ========================================
+   3-col "Cutting edge solutions" in dark sections
+   DOM: .columns-img-col > p > picture + strong + text + a
+   ======================================== */
+.dark .columns > div > div {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dark .columns > div > div p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.dark .columns > div > div img {
+  border-radius: 12px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.dark .columns > div > div strong {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 500;
+  color: #fff;
+  margin: 16px 0 8px;
+}
+
+.dark .columns > div > div a:any-link {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.dark .columns > div > div a:any-link::after {
+  content: '\2192';
+  margin-left: 6px;
+  transition: margin-left 0.3s;
+}
+
+.dark .columns > div > div a:any-link:hover::after {
+  margin-left: 10px;
+}
+
+/* ========================================
+   2-col Careers section
+   DOM: div > p > strong + strong + text + a
+   ======================================== */
+.columns-2-cols > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.columns-2-cols > div > div:not(.columns-img-col) p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.columns-2-cols > div > div:not(.columns-img-col) strong {
+  display: block;
+}
+
+/* First strong = label (e.g. "CAREERS") */
+.columns-2-cols > div > div:not(.columns-img-col) strong:first-child {
+  font-family: var(--body-font-family);
+  font-weight: 700;
+  font-size: var(--heading-font-size-xs);
+  letter-spacing: var(--label-letter-spacing);
+  text-transform: var(--label-text-transform);
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+/* Second strong = heading (e.g. "Seize the future") */
+.columns-2-cols > div > div:not(.columns-img-col) strong:nth-child(2) {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--text-color);
+  margin-bottom: 12px;
+}
+
+/* "Come join us" link in careers */
+.columns-2-cols > div > div:not(.columns-img-col) a:any-link {
+  color: var(--text-color);
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-2-cols > div > div:not(.columns-img-col) a:any-link::after {
+  content: '\2192';
+  margin-left: 6px;
+  transition: margin-left 0.3s;
+}
+
+.columns-2-cols > div > div:not(.columns-img-col) a:any-link:hover::after {
+  margin-left: 10px;
 }
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 32px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .dark .columns > div > div img {
+    aspect-ratio: 4 / 5;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  .columns-2-cols > div > .columns-img-col img {
+    border-radius: 12px;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (width >= 1200px) {
+  .columns > div {
+    gap: 24px;
+  }
+
+  .dark .columns-3-cols > div > div {
+    min-height: 400px;
   }
 }

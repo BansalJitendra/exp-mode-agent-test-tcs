@@ -61,8 +61,8 @@
   --heading-font-size-xs: 14px;
 
   /* ========== TYPOGRAPHY ========== */
-  --body-line-height: 1.8;
-  --heading-line-height: 1.2;
+  --body-line-height: 1.6;
+  --heading-line-height: 1;
   --body-letter-spacing: 0.5px;
   --heading-letter-spacing: normal;
   --label-letter-spacing: 2.1px;
@@ -80,7 +80,7 @@
 
   /* ========== LAYOUT ========== */
   --nav-height: 64px;
-  --content-max-width: 1200px;
+  --content-max-width: 1280px;
   --container-padding: 24px;
 
   /* ========== BUTTONS ========== */
@@ -154,8 +154,8 @@
 
 @media (width >= 1200px) {
   :root {
-    --heading-font-size-xxl: 48px;
-    --heading-font-size-xl: 40px;
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl: 48px;
     --heading-font-size-l: 32px;
     --heading-font-size-m: 24px;
   }
@@ -216,13 +216,18 @@ h6 {
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  margin-bottom: 16px;
+}
+
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
-/* Label-style headings (h4/h5 on TCS: uppercase, letter-spaced) */
+/* Label-style headings (TCS: uppercase, letter-spaced, body font) */
 h5,
 h6 {
   font-family: var(--body-font-family);
@@ -230,6 +235,7 @@ h6 {
   letter-spacing: var(--label-letter-spacing);
   text-transform: var(--label-text-transform);
   font-size: var(--heading-font-size-xs);
+  line-height: 1.7;
 }
 
 /* ========================================
@@ -264,7 +270,7 @@ pre {
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: 0 16px;
 }
 
 input,
@@ -458,7 +464,8 @@ main img {
    ======================================== */
 
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: var(--spacing-xl) 0;
 }
 
 main > .section > div {
@@ -468,12 +475,17 @@ main > .section > div {
 }
 
 main > .section:first-of-type {
-  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 @media (width >= 900px) {
+  main > .section {
+    padding: var(--spacing-xxl) 0;
+  }
+
   main > .section > div {
-    padding: 0 var(--container-padding);
+    padding: 0 var(--section-gutter);
   }
 }
 
@@ -481,19 +493,21 @@ main > .section:first-of-type {
    SECTION VARIANTS
    ======================================== */
 
-/* Light section (light purple/gray - TCS "Meet Us Here" style) */
+/* Light section (light gray/purple - TCS "Meet Us Here" / "Customer Stories" style) */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
-  margin: 0;
-  padding: 40px 0;
 }
 
-/* Dark section (TCS dark background sections) */
+/* Dark section (TCS dark background - "Cutting edge" / "Contact CTA") */
 main .section.dark {
-  background-color: var(--dark-color);
-  margin: 0;
-  padding: var(--spacing-section) 0;
+  background-color: #000;
+  padding: var(--spacing-xxl) 0;
+}
+
+/* Hide metadata block if no JS loaded */
+main .section.metadata-container {
+  display: none;
 }
 
 main .section.dark h1,
@@ -506,7 +520,7 @@ main .section.dark h6 {
 }
 
 main .section.dark p {
-  color: var(--text-color-muted);
+  color: rgb(180 180 184);
 }
 
 main .section.dark a:any-link {
@@ -518,21 +532,37 @@ main .section.dark a:hover {
 }
 
 main .section.dark a.button:any-link {
-  border: 1px solid var(--text-color-muted);
-  background-color: var(--dark-color);
+  border: 1px solid rgb(180 180 184);
+  background-color: transparent;
   color: #fff;
 }
 
 main .section.dark a.button:any-link:hover {
   background-color: #fff;
   border-color: #fff;
-  color: var(--dark-color);
+  color: #000;
 }
 
-/* Very dark section (TCS hero-area / footer CTA) */
+/* CTA-style dark section (centered text + button) */
+main .section.dark:not([class*="columns-container"], [class*="cards-container"]) .default-content-wrapper {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+main .section.dark:not([class*="columns-container"], [class*="cards-container"]) .default-content-wrapper p:first-child {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 500;
+  line-height: var(--heading-line-height);
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+/* Very dark section (TCS hero-area) */
 main .section.very-dark {
   background-color: #01000e;
-  margin: 0;
   padding: var(--spacing-section) 0;
 }
 
@@ -545,6 +575,7 @@ main .section.very-dark h6 {
   color: #fff;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 main .section.very-dark p {
   color: var(--text-color-muted);
 }
@@ -556,7 +587,6 @@ main .section.very-dark a:any-link {
 /* Blue accent section */
 main .section.blue {
   background-color: var(--accent-color);
-  margin: 0;
   padding: var(--spacing-xl) 0;
 }
 
@@ -566,7 +596,14 @@ main .section.blue h3,
 main .section.blue h4,
 main .section.blue h5,
 main .section.blue h6,
+/* stylelint-disable-next-line no-descending-specificity */
 main .section.blue p,
 main .section.blue a:any-link {
   color: #fff;
+}
+
+@media (width >= 900px) {
+  main .section.dark {
+    padding: var(--spacing-section) 0;
+  }
 }
