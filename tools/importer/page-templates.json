@@ -1,0 +1,28 @@
+{
+  "templates": [
+    {
+      "name": "tcs-homepage",
+      "urls": ["https://www.tcs.com/"],
+      "description": "TCS corporate homepage with hero banner, news carousel, solutions columns, customer stories, events, news/insights, careers, and contact CTA",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [".heroBanner"]
+        },
+        {
+          "name": "cards",
+          "instances": [".storyCardCarousel", ".solutionCard", ".horizontalAccordion", ".featureCard"]
+        },
+        {
+          "name": "columns",
+          "instances": [".interactiveHubPannel", ".textWithAsset"]
+        },
+        {
+          "name": "section-contact-cta",
+          "instances": [".footerFlyout"],
+          "section": "contact-cta"
+        }
+      ]
+    }
+  ]
+}
