@@ -1,27 +1,45 @@
 export default function decorate(block) {
-  // Standard EDS hero pattern: move picture to be a direct child of the block
-  // and flatten the row/cell structure into a single content wrapper
   const rows = [...block.children];
   let picture = null;
+  let videoSrc = null;
   const contentElements = [];
 
   rows.forEach((row) => {
     const cells = [...row.children];
     cells.forEach((cell) => {
       const pic = cell.querySelector('picture');
-      if (pic && !cell.textContent.trim().replace(pic.textContent, '').trim()) {
-        // This cell only contains a picture
+      const videoLink = cell.querySelector('a[href$=".mp4"], a[href$=".webm"]');
+
+      if (videoLink) {
+        videoSrc = videoLink.href;
+        if (pic) picture = pic;
+      } else if (pic && !cell.textContent.trim().replace(pic.textContent, '').trim()) {
         picture = pic;
       } else {
-        // This cell has text/link content - collect its children
         [...cell.children].forEach((child) => contentElements.push(child));
       }
     });
     row.remove();
   });
 
-  // Rebuild: picture first, then a single content div
-  if (picture) {
+  if (videoSrc) {
+    const video = document.createElement('video');
+    video.autoplay = true;
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.loop = true;
+    video.playsInline = true;
+    if (picture) {
+      const img = picture.querySelector('img');
+      if (img) video.poster = img.src;
+    }
+    const source = document.createElement('source');
+    source.src = videoSrc;
+    source.type = 'video/mp4';
+    video.append(source);
+    block.append(video);
+    block.classList.add('hero-video');
+  } else if (picture) {
     block.append(picture);
   }
 
