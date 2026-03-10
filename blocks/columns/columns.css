@@ -27,22 +27,41 @@
    3-col "Cutting edge solutions" in dark sections
    DOM: .columns-img-col > p > picture + strong + text + a
    ======================================== */
+
+/* Section-level overrides for this dark columns section */
+main .section.dark.columns-container {
+  padding: 50px 0;
+}
+
+.dark.columns-container > .default-content-wrapper h2 {
+  margin-bottom: 50px;
+}
+
 .dark .columns > div > div {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
+  background: #1c1c1e;
 }
 
 .dark .columns > div > div p {
   display: flex;
   flex-direction: column;
   margin: 0;
+  padding: 20px;
+  padding-top: 0;
+  color: rgb(180 180 184);
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
 }
 
 .dark .columns > div > div img {
-  border-radius: 12px;
-  aspect-ratio: 3 / 4;
+  border-radius: 0;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+  margin: 0 -20px;
+  width: calc(100% + 40px);
+  max-width: none;
 }
 
 .dark .columns > div > div strong {
@@ -50,27 +69,43 @@
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-l);
   font-weight: 500;
-  color: #fff;
-  margin: 16px 0 8px;
+  color: rgb(255 255 255 / 80%);
+  margin: 20px 0 8px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .dark .columns > div > div a:any-link {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #4a7ec2;
   color: #fff;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  margin-top: 8px;
+  justify-content: center;
+  font-size: 0;
+  text-decoration: none;
+  margin: 0;
+  transition: background-color 0.3s;
 }
 
 .dark .columns > div > div a:any-link::after {
   content: '\2192';
-  margin-left: 6px;
-  transition: margin-left 0.3s;
+  font-size: 18px;
+  margin: 0;
+  transition: none;
 }
 
+.dark .columns > div > div a:any-link:hover {
+  background-color: #3a6eae;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
 .dark .columns > div > div a:any-link:hover::after {
-  margin-left: 10px;
+  margin-left: 0;
 }
 
 /* ========================================
@@ -115,6 +150,7 @@
 }
 
 /* "Come join us" link in careers */
+/* stylelint-disable-next-line no-descending-specificity */
 .columns-2-cols > div > div:not(.columns-img-col) a:any-link {
   color: var(--text-color);
   font-weight: 500;
@@ -147,8 +183,8 @@
     order: unset;
   }
 
-  .dark .columns > div > div img {
-    aspect-ratio: 4 / 5;
+  .dark .columns > div {
+    gap: 50px;
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
@@ -162,9 +198,5 @@
 @media (width >= 1200px) {
   .columns > div {
     gap: 24px;
-  }
-
-  .dark .columns-3-cols > div > div {
-    min-height: 400px;
   }
 }
