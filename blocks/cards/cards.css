@@ -1,5 +1,6 @@
 /* Section-level width override to match TCS layout */
-.cards-container > .cards-wrapper {
+.cards-container > .cards-wrapper,
+.cards-container > .default-content-wrapper {
   max-width: calc(100% - 150px);
 }
 
