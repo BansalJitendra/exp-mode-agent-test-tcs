@@ -37,7 +37,7 @@
 
 .cards > ul > li img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
 }
@@ -183,10 +183,10 @@
 
 @media (width >= 1200px) {
   .cards > ul {
-    gap: 20px;
+    gap: 16px;
   }
 
   .cards > ul > li {
-    flex: 0 0 calc(33.333% - 14px);
+    flex: 0 0 calc(33.333% - 11px);
   }
 }
