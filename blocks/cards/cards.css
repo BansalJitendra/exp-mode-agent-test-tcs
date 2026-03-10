@@ -1,3 +1,8 @@
+/* Section-level width override to match TCS layout */
+.cards-container > .cards-wrapper {
+  max-width: calc(100% - 150px);
+}
+
 /* Cards block - TCS style horizontal carousel */
 .cards > ul {
   list-style: none;
