@@ -1,0 +1,12 @@
+{
+  "total": 3,
+  "offset": 0,
+  "limit": 3,
+  "data": [
+    { "name": "Hero", "path": "/tools/sidekick/blocks/hero" },
+    { "name": "Cards", "path": "/tools/sidekick/blocks/cards" },
+    { "name": "Columns", "path": "/tools/sidekick/blocks/columns" }
+  ],
+  "columns": ["name", "path"],
+  ":type": "sheet"
+}
